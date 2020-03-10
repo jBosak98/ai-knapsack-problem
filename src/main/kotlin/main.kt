@@ -15,3 +15,4 @@ fun generatePopulation(objectsSize:Int,maxWeight:Int,maxKnapsackSize:Int,output_
 fda
 
 data class Item(val weight:Int, val size:Int)
+fsdfdsfsfd
