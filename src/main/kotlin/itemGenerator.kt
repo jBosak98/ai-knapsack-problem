@@ -16,20 +16,20 @@ fun isProperWeightsArray(knapsackCapacity: Int) = isProperArray(knapsackCapacity
 fun isProperSizeArray(knapsackSize: Int) = isProperArray(knapsackSize * 2)
 
 @ExperimentalUnsignedTypes
-fun generateItems(objectsSize: UInt, knapsackCapacity: Int, knapsackSize: Int, output_file: String): List<Item> {
+fun generateItems(arraySize: UInt, knapsackCapacity: Int, knapsackSize: Int): List<Item> {
 
     val weightArrayRequirements =
-        ArrayRequirements(objectsSize, minWeight, maxWeight(knapsackCapacity, objectsSize.toInt()), isProperWeightsArray(knapsackCapacity))
+        ArrayRequirements(arraySize, minWeight, maxWeight(knapsackCapacity, arraySize.toInt()), isProperWeightsArray(knapsackCapacity))
     val weights = getRandomArray(weightArrayRequirements)
 
     val sizeArrayRequirements =
-        ArrayRequirements(objectsSize, minSize, maxSize(knapsackSize, objectsSize.toInt()), isProperSizeArray(knapsackSize))
+        ArrayRequirements(arraySize, minSize, maxSize(knapsackSize, arraySize.toInt()), isProperSizeArray(knapsackSize))
     val sizes = getRandomArray(sizeArrayRequirements)
 
-    val priceArrayRequirements = ArrayRequirements(objectsSize, minPrice, maxPrice(objectsSize.toInt()), fun(_: Array<Int>) = true)
+    val priceArrayRequirements = ArrayRequirements(arraySize, minPrice, maxPrice(arraySize.toInt()), fun(_: Array<Int>) = true)
     val prices = getRandomArray(priceArrayRequirements)
 
-    return (0 until objectsSize.toInt()).map { index ->
+    return (0 until arraySize.toInt()).map { index ->
         Item(
             weight = weights[index],
             size = sizes[index],

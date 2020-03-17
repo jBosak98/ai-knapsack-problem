@@ -8,8 +8,14 @@ fun main() {
 
 
 @ExperimentalUnsignedTypes
-fun generate(n: UInt, w: Int, s: Int, output_file: String) = generateItems(n, w, s, output_file)
+fun generate(n: UInt, w: Int, s: Int, output_file: String) {
+    val items = generateItems(n, w, s)
+    writeToFile(items, output_file)
+}
 
+fun writeToFile(items: List<Item>, outputFile: String) {
+    TODO("Not yet implemented")
+}
 
 
 
