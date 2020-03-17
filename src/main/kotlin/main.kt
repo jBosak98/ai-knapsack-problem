@@ -30,7 +30,7 @@ fun generateItems(objectsSize: UInt, knapsackCapacity: Int, knapsackSize: Int, o
     val sizes = getRandomArray(objectsSize, 1, 10 * knapsackSize / objectsSize.toInt(), isProperSizeArray)
     val prices  = getRandomArray(objectsSize,1, objectsSize.toInt(), fun(_: List<Int>) = true)
 
-    return (0..objectsSize.toInt()).map{ Item(weights[it], sizes[it], prices[it]) }
+    return (0 until objectsSize.toInt()).map{ Item(weights[it], sizes[it], prices[it]) }
 
 }
 
