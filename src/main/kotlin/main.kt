@@ -9,7 +9,7 @@ fun main() {
 
 @ExperimentalUnsignedTypes
 fun generate(n: UInt, w: Int, s: Int, output_file: String) {
-    val items = generateItems(n, w, s)
+    val items = generateItems(arraySize = n, knapsackCapacity = w, knapsackSize = s)
     writeToFile(items, output_file)
 }
 
