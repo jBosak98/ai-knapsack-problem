@@ -22,10 +22,3 @@ fun initPopulation(task: Task, populationSize: UInt): List<Array<Item>> {
     }
     return (0..populationSize.toInt()).map(getAsMuchItemsAsPossible)
 }
-
-data class Task(
-    val arraySize: UInt, //number of generated items
-    val knapsackCapacity: UInt, //max carrying capacity
-    val knapsackSize: UInt, // max knapsack size
-    val items: Array<Item>
-)
