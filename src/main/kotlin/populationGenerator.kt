@@ -6,7 +6,6 @@ fun initPopulation(task: Task, populationSize: UInt): List<Array<Item>> {
     val (_, knapsackCapcity, knapsackSize, items: Array<Item>) = task
 
     val fillKnapsack: (Array<Item>, Item) -> Array<Item> = { knapsack: Array<Item>, item: Item ->
-
         val isEnoughSpace = knapsack.sumBy { it.size } + item.size < knapsackSize.toInt()
         val isLightEnough = knapsack.sumBy { it.weight } + item.weight < knapsackCapcity.toInt()
 
@@ -15,13 +14,13 @@ fun initPopulation(task: Task, populationSize: UInt): List<Array<Item>> {
             false -> knapsack
         }
     }
-    val getAsMuchAsPossible: (Int) -> Array<Item> = {
+    val getAsMuchItemsAsPossible: (Int) -> Array<Item> = {
         items
             .toList()
             .shuffled()
             .fold(emptyArray(), fillKnapsack)
     }
-    return (0..populationSize.toInt()).map(getAsMuchAsPossible)
+    return (0..populationSize.toInt()).map(getAsMuchItemsAsPossible)
 }
 
 data class Task(
