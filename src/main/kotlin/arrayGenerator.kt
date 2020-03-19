@@ -3,6 +3,9 @@ import kotlin.random.Random
 @ExperimentalUnsignedTypes
 fun randomArray(array: Array<Int>, requirements: ArrayRequirements): Array<Int> {
     val (size, minValue, maxValue, fulfillment) = requirements
+
+    fun getRandomInt(minValue: Int, maxValue: Int) = Random.nextInt(minValue, maxValue)
+
     return when {
         array.size == size.toInt() && fulfillment(array) -> array
         array.size == size.toInt() -> randomArray(
@@ -16,7 +19,7 @@ fun randomArray(array: Array<Int>, requirements: ArrayRequirements): Array<Int> 
     }
 }
 
-fun getRandomInt(minValue: Int, maxValue: Int) = Random.nextInt(minValue, maxValue)
+
 
 @ExperimentalUnsignedTypes
 fun getRandomArray(requirements: ArrayRequirements): Array<Int> {
