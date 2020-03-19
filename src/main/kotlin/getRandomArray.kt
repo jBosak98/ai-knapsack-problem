@@ -1,7 +1,8 @@
+import model.ArrayRequirements
 import kotlin.random.Random
 
 @ExperimentalUnsignedTypes
-fun randomArray(array: Array<Int>, requirements: ArrayRequirements): Array<Int> {
+private fun randomArray(array: Array<Int>, requirements: ArrayRequirements): Array<Int> {
     val (size, minValue, maxValue, fulfillment) = requirements
 
     fun getRandomInt(minValue: Int, maxValue: Int) = Random.nextInt(minValue, maxValue)
@@ -26,10 +27,3 @@ fun getRandomArray(requirements: ArrayRequirements): Array<Int> {
     return randomArray(emptyArray(), requirements)
 }
 
-@ExperimentalUnsignedTypes
-data class ArrayRequirements(
-    val size: UInt,
-    val minValue: Int,
-    val maxValue: Int,
-    val fulfillment: (elements: Array<Int>) -> Boolean
-)

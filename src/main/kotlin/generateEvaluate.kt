@@ -1,4 +1,4 @@
-
+import model.Item
 
 
 fun generateEvaluate(fulfilment:(Array<Item>) -> Boolean): (Array<Item>) -> Int {

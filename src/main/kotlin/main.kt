@@ -1,3 +1,6 @@
+import model.Individual
+import model.Item
+import model.Task
 import java.io.File
 import kotlin.UInt
 
@@ -11,8 +14,8 @@ fun main() {
     writeToFile(items, "data")
     val task =
         Task(itemsAmount, knapsackCapacity, knapsackSize, items.toTypedArray())
-    val fulfilment = createFulfilment(knapsackSize.toInt(), knapsackCapacity.toInt())
-    val randomAlgorithm = getRandomItems(fulfilment, items.toTypedArray(), knapsackSize.toInt(),
+    val fulfilment = createKnapsackConstrainsCheck(knapsackSize.toInt(), knapsackCapacity.toInt())
+    val randomAlgorithm = getRandomAlgorithm(fulfilment, items.toTypedArray(), knapsackSize.toInt(),
         knapsackCapacity.toInt()
     )
 
@@ -23,7 +26,6 @@ fun main() {
     }
 
 }
-data class Individual(val knapsack:Array<Item>, val evaluation:Int)
 
 @ExperimentalUnsignedTypes
 fun generate(n: UInt, w: UInt, s: UInt, output_file: String): List<Item> =

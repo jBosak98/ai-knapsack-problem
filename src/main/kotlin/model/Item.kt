@@ -1,3 +1,5 @@
+package model
+
 data class Item(
     val id: Int,
     val weight: Int,

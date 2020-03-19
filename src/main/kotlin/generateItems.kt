@@ -1,19 +1,22 @@
-const val minWeight = 1;
-fun maxWeight(knapsackCapacity: UInt, objectsSize: UInt) = (10u * knapsackCapacity / objectsSize).toUInt()
+import model.ArrayRequirements
+import model.Item
 
-const val minSize = 1;
-fun maxSize(knapsackSize: UInt, objectsSize: UInt) = 10u * knapsackSize / objectsSize
+private const val minWeight = 1;
+private fun maxWeight(knapsackCapacity: UInt, objectsSize: UInt) = (10u * knapsackCapacity / objectsSize).toUInt()
 
-const val minPrice = 1;
-fun maxPrice(objectsSize: Int) = objectsSize
+private const val minSize = 1;
+private fun maxSize(knapsackSize: UInt, objectsSize: UInt) = 10u * knapsackSize / objectsSize
 
-val isProperArray: (minValue: UInt) -> ((elements: Array<Int>) -> Boolean) = { minValue ->
+private const val minPrice = 1;
+private fun maxPrice(objectsSize: Int) = objectsSize
+
+private val isProperArray: (minValue: UInt) -> ((elements: Array<Int>) -> Boolean) = { minValue ->
     val compare: (elements: Array<Int>) -> Boolean = { elements -> elements.sum() > minValue.toInt() }
     compare
 }
 
-fun isProperWeightsArray(knapsackCapacity: UInt) = isProperArray(knapsackCapacity * 2u)
-fun isProperSizeArray(knapsackSize: UInt) = isProperArray(knapsackSize * 2u)
+private fun isProperWeightsArray(knapsackCapacity: UInt) = isProperArray(knapsackCapacity * 2u)
+private fun isProperSizeArray(knapsackSize: UInt) = isProperArray(knapsackSize * 2u)
 
 @ExperimentalUnsignedTypes
 fun generateItems(arraySize: UInt, knapsackCapacity: UInt, knapsackSize: UInt): List<Item> {
