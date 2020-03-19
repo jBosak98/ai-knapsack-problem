@@ -17,8 +17,13 @@ fun main() {
     )
 
     val population = initPopulation(10u, randomAlgorithm)
-}
+    val evaluationFunction = generateEvaluate(fulfilment)
+    val individuals = population.map{
+        Individual(it, evaluationFunction(it))
+    }
 
+}
+data class Individual(val knapsack:Array<Item>, val evaluation:Int)
 
 @ExperimentalUnsignedTypes
 fun generate(n: UInt, w: UInt, s: UInt, output_file: String): List<Item> =
