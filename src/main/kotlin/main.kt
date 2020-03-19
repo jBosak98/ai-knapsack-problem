@@ -10,7 +10,7 @@ fun main() {
     val knapsackCapacity = 100u
     val knapsackSize = 100u
 
-    val probability = 0.5
+    val crossoverProbability = 0.5
 
     val items = generate(itemsAmount, knapsackCapacity, knapsackSize, "xd")
     writeToFile(items, "data")
@@ -25,8 +25,11 @@ fun main() {
 
     val population = initPopulation(10u, randomAlgorithm, createIndividual)
     
-    val crossover = generateCrossover(probability, createIndividual)
-    crossover(population)
+    val crossover = generateCrossover(crossoverProbability, createIndividual)
+    val crossedPopulation = crossover(population)
+    val mutation = generateMutation(mutationProbability, createIndividual)
+
+
 
 }
 
