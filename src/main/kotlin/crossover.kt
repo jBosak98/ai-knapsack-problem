@@ -19,7 +19,7 @@ fun generateCrossover(
         val p1Chromosome = parent1.take(xPlace).toTypedArray()
         val p2Chromosome = parent2.drop(xPlace).toTypedArray()
 
-        val child = arrayOf(*p1Chromosome, *p2Chromosome)
+        val child = arrayOf(*p1Chromosome, *p2Chromosome).distinctBy { it.id }.toTypedArray()
         createIndividual(child)
     }
     return { population: Population ->
