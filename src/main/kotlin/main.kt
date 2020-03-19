@@ -26,6 +26,8 @@ fun main() {
     val population = initPopulation(10u, randomAlgorithm, createIndividual)
     
     val crossover = generateCrossover(probability, createIndividual)
+    val selection = generateTournament(10)
+
     crossover(population)
 
 }
