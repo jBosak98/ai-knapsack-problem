@@ -1,36 +1,45 @@
-import model.Individual
 import model.Item
 import model.Task
 import java.io.File
 import kotlin.UInt
 
+const val itemsAmount = 100u
+const val knapsackCapacity = 100u
+const val knapsackSize = 100u
+
+const val iterations = 1000
+const val populationSize = 1000u
+
+const val crossoverProbability = 0.5
+const val mutationProbability = 0.5
+
+const val tournamentSize = 5
+
+const val outputfile = "xd"
+
 @ExperimentalUnsignedTypes
 fun main() {
-    val itemsAmount = 100u
-    val knapsackCapacity = 100u
-    val knapsackSize = 100u
-
-    val crossoverProbability = 0.5
-    val mutationProbability = 0.5
-
-    val items = generate(itemsAmount, knapsackCapacity, knapsackSize, "xd")
-    writeToFile(items, "data")
+    val items = generate(itemsAmount, knapsackCapacity, knapsackSize, outputfile)
+    writeToFile(items, outputfile)
     val task =
         Task(itemsAmount, knapsackCapacity, knapsackSize, items.toTypedArray())
     val fulfilment = createKnapsackConstrainsCheck(knapsackSize.toInt(), knapsackCapacity.toInt())
-    val randomAlgorithm = getRandomAlgorithm(fulfilment, items.toTypedArray(), knapsackSize.toInt(),
+    val creationAlgorithm = getRandomAlgorithm(fulfilment, items.toTypedArray(), knapsackSize.toInt(),
         knapsackCapacity.toInt()
     )
     val evaluationFunction = generateEvaluate(fulfilment)
     val createIndividual = createIndividualFactory(evaluationFunction)
-
-    val population = initPopulation(10u, randomAlgorithm, createIndividual)
-    
-
     val crossover = generateCrossover(crossoverProbability, createIndividual)
-    val crossedPopulation = crossover(population)
-    val mutation = generateMutation(mutationProbability, createIndividual)
+    val mutation = generateMutation(mutationProbability, createIndividual, items.toTypedArray())
 
+
+    val selection = generateTournament(tournamentSize)
+
+    val epoch = generateEpoch(crossover, mutation, selection)
+
+
+    val population = initPopulation(populationSize, creationAlgorithm, createIndividual)
+    val finalPopulation = (0..iterations).toList().fold(population, epoch)
 }
 
 @ExperimentalUnsignedTypes
