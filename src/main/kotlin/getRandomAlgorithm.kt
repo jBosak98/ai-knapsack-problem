@@ -1,9 +1,10 @@
 import model.Item
+import model.Knapsack
 
-fun getRandomAlgorithm(fulfilment: (Array<Item>) -> Boolean, items: Array<Item>, knapsackSize: Int, knapsackCapacity: Int): (Int) -> Array<Item> {
-    fun fillKnapsack(fulfilment: (Array<Item>) -> Boolean): (knapsack: Array<Item>, item: Item) -> Array<Item> {
+fun getRandomAlgorithm(fulfilment: (Knapsack) -> Boolean, items: Array<Item>, knapsackSize: Int, knapsackCapacity: Int): (Int) -> Knapsack {
+    fun fillKnapsack(fulfilment: (Knapsack) -> Boolean): (knapsack: Knapsack, item: Item) -> Knapsack {
         return { knapsack, item ->
-            val newKnapsack = arrayOf(*knapsack, item)
+            val newKnapsack = Knapsack(arrayOf(*knapsack.items, item))
             when (fulfilment(newKnapsack)) {
                 true -> newKnapsack
                 false -> knapsack
@@ -14,6 +15,6 @@ fun getRandomAlgorithm(fulfilment: (Array<Item>) -> Boolean, items: Array<Item>,
     val knapsack = items
         .toList()
         .shuffled()
-        .fold(emptyArray(), fillKnapsack(fulfilment))
+        .fold(Knapsack(emptyArray()), fillKnapsack(fulfilment))
     return { knapsack }
 }

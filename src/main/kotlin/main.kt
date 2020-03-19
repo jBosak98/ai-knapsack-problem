@@ -21,7 +21,7 @@ fun main() {
 
     val population = initPopulation(10u, randomAlgorithm)
     val evaluationFunction = generateEvaluate(fulfilment)
-    val individuals = population.map{
+    val individuals = population.knapsacks.map{
         Individual(it, evaluationFunction(it))
     }
 

@@ -1,10 +1,11 @@
 import model.Item
+import model.Knapsack
 
 
-fun generateEvaluate(fulfilment:(Array<Item>) -> Boolean): (Array<Item>) -> Int {
-    val evaluate: (Array<Item>) -> Int = { items:Array<Item> ->
+fun generateEvaluate(fulfilment:(Knapsack) -> Boolean): (Knapsack) -> Int {
+    val evaluate: (Knapsack) -> Int = { knapsack:Knapsack ->
         when {
-            (fulfilment(items)) -> items.sumBy { it.price }
+            (fulfilment(knapsack)) -> knapsack.items.sumBy { it.price }
             else -> 0
         }
     }
