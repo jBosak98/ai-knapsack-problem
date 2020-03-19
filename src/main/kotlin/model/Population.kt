@@ -1,3 +1,3 @@
 package model
 
-data class Population(val knapsacks:List<Knapsack>)
+data class Population(val individuals:List<Individual>)

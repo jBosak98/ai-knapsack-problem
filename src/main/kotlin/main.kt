@@ -18,12 +18,11 @@ fun main() {
     val randomAlgorithm = getRandomAlgorithm(fulfilment, items.toTypedArray(), knapsackSize.toInt(),
         knapsackCapacity.toInt()
     )
-
-    val population = initPopulation(10u, randomAlgorithm)
     val evaluationFunction = generateEvaluate(fulfilment)
-    val individuals = population.knapsacks.map{
-        Individual(it, evaluationFunction(it))
-    }
+    val createIndividual = createIndividualFactory(evaluationFunction)
+
+    val population = initPopulation(10u, randomAlgorithm, createIndividual)
+
 
 }
 
@@ -35,6 +34,4 @@ fun generate(n: UInt, w: UInt, s: UInt, output_file: String): List<Item> =
 fun writeToFile(items: List<Item>, outputFile: String) {
     File(outputFile).writeText("XD")
 }
-
-
 

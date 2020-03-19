@@ -1,13 +1,18 @@
+import model.Individual
 import model.Item
-import model.Knapsack
 import model.Population
-
-//fun init_population(n_items: UInt, size: UInt) = initPopulation(n_items, size)
 
 
 @ExperimentalUnsignedTypes
-fun initPopulation(populationSize: UInt, algorithm: (Int) -> Knapsack): Population {
-    return Population((0..populationSize.toInt()).map(algorithm))
+fun initPopulation(
+    populationSize: UInt,
+    algorithm: (Int) -> Array<Item>,
+    createIndividual: (items: Array<Item>) -> Individual
+): Population {
+    val knapsacks = (0..populationSize.toInt()).map(algorithm)
+    return Population(knapsacks.map { knapsack ->
+        createIndividual(knapsack)
+    })
 }
 
 
