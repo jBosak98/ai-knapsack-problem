@@ -26,11 +26,10 @@ fun main() {
 
     val population = initPopulation(10u, randomAlgorithm, createIndividual)
     
+
     val crossover = generateCrossover(crossoverProbability, createIndividual)
     val crossedPopulation = crossover(population)
     val mutation = generateMutation(mutationProbability, createIndividual)
-
-
 
 }
 
