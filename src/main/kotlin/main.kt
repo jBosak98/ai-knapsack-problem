@@ -1,3 +1,4 @@
+import java.io.File
 import kotlin.UInt
 
 @ExperimentalUnsignedTypes
@@ -7,9 +8,15 @@ fun main() {
     val knapsackSize = 100u
 
     val items = generate(itemsAmount, knapsackCapacity, knapsackSize, "xd")
+    writeToFile(items, "data")
     val task =
         Task(itemsAmount, knapsackCapacity, knapsackSize, items.toTypedArray())
-    val population = initPopulation(task, 10u)
+    val fulfilment = createFulfilment(knapsackSize.toInt(), knapsackCapacity.toInt())
+    val randomAlgorithm = getRandomItems(fulfilment, items.toTypedArray(), knapsackSize.toInt(),
+        knapsackCapacity.toInt()
+    )
+
+    val population = initPopulation(10u, randomAlgorithm)
 }
 
 
@@ -19,7 +26,7 @@ fun generate(n: UInt, w: UInt, s: UInt, output_file: String): List<Item> =
 
 
 fun writeToFile(items: List<Item>, outputFile: String) {
-//    TODO("Not yet implemented")
+    File(outputFile).writeText("XD")
 }
 
 

@@ -2,23 +2,16 @@
 
 
 @ExperimentalUnsignedTypes
-fun initPopulation(task: Task, populationSize: UInt): List<Array<Item>> {
-    val (_, knapsackCapcity, knapsackSize, items: Array<Item>) = task
+fun initPopulation(populationSize: UInt, algorithm: (Int) -> Array<Item>): List<Array<Item>> {
+    return (0..populationSize.toInt()).map(algorithm)
+}
 
-    val fillKnapsack: (Array<Item>, Item) -> Array<Item> = { knapsack: Array<Item>, item: Item ->
-        val isEnoughSpace = knapsack.sumBy { it.size } + item.size < knapsackSize.toInt()
-        val isLightEnough = knapsack.sumBy { it.weight } + item.weight < knapsackCapcity.toInt()
 
-        when (isEnoughSpace && isLightEnough) {
-            true -> arrayOf(*knapsack, item)
-            false -> knapsack
-        }
+
+val createFulfilment:(knapsackSize:Int, knapsackCapacity:Int) -> (items:Array<Item>) -> Boolean =  {knapsackSize, knapsackCapacity ->
+     { items ->
+        val isEnoughSpace = items.sumBy { it.size } < knapsackSize
+        val isLightEnough = items.sumBy { it.weight } < knapsackCapacity
+        isEnoughSpace && isLightEnough
     }
-    val getAsMuchItemsAsPossible: (Int) -> Array<Item> = {
-        items
-            .toList()
-            .shuffled()
-            .fold(emptyArray(), fillKnapsack)
-    }
-    return (0..populationSize.toInt()).map(getAsMuchItemsAsPossible)
 }
