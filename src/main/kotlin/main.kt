@@ -11,6 +11,7 @@ fun main() {
     val knapsackSize = 100u
 
     val crossoverProbability = 0.5
+    val mutationProbability = 0.5
 
     val items = generate(itemsAmount, knapsackCapacity, knapsackSize, "xd")
     writeToFile(items, "data")
