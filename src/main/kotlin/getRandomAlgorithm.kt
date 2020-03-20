@@ -1,7 +1,9 @@
 import model.Item
+import model.Task
 
 
-fun getRandomAlgorithm(fulfilment: (Array<Item>) -> Boolean, items: Array<Item>, knapsackSize: Int, knapsackCapacity: Int): (Int) -> Array<Item> {
+fun getRandomAlgorithm(fulfilment: (Array<Item>) -> Boolean, task:Task): (Int) -> Array<Item> {
+
     fun fillKnapsack(fulfilment: (Array<Item>) -> Boolean): (items: Array<Item>, item: Item) -> Array<Item> {
         return { items, item ->
             val newItems = (arrayOf(*items, item))
@@ -12,7 +14,7 @@ fun getRandomAlgorithm(fulfilment: (Array<Item>) -> Boolean, items: Array<Item>,
         }
     }
 
-    val knapsack = items
+    val knapsack = task.items
         .toList()
         .shuffled()
         .fold(emptyArray(), fillKnapsack(fulfilment))

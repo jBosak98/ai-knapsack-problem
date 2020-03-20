@@ -23,7 +23,7 @@ private fun isProperWeightsArray(knapsackCapacity: UInt) =
 private fun isProperSizeArray(knapsackSize: UInt) = isProperArray(knapsackSize * 2u)
 
 @ExperimentalUnsignedTypes
-fun generateItems(arraySize: UInt, knapsackCapacity: UInt, knapsackSize: UInt): List<Item> {
+fun generateItems(arraySize: UInt, knapsackCapacity: UInt, knapsackSize: UInt): Array<Item> {
 
     val weightArrayRequirements =
         ArrayRequirements(
@@ -54,5 +54,5 @@ fun generateItems(arraySize: UInt, knapsackCapacity: UInt, knapsackSize: UInt): 
             size = sizes[index],
             price = prices[index]
         )
-    }
+    }.toTypedArray()
 }
