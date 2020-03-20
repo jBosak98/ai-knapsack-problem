@@ -1,3 +1,6 @@
+package generators
+
+import getRandomArray
 import model.ArrayRequirements
 import model.Item
 
@@ -15,7 +18,8 @@ private val isProperArray: (minValue: UInt) -> ((elements: Array<Int>) -> Boolea
     compare
 }
 
-private fun isProperWeightsArray(knapsackCapacity: UInt) = isProperArray(knapsackCapacity * 2u)
+private fun isProperWeightsArray(knapsackCapacity: UInt) =
+    isProperArray(knapsackCapacity * 2u)
 private fun isProperSizeArray(knapsackSize: UInt) = isProperArray(knapsackSize * 2u)
 
 @ExperimentalUnsignedTypes
@@ -31,11 +35,16 @@ fun generateItems(arraySize: UInt, knapsackCapacity: UInt, knapsackSize: UInt): 
     val weights = getRandomArray(weightArrayRequirements)
 
     val sizeArrayRequirements =
-        ArrayRequirements(arraySize, minSize, maxSize(knapsackSize, arraySize).toInt(), isProperSizeArray(knapsackSize))
+        ArrayRequirements(arraySize,
+            minSize, maxSize(knapsackSize, arraySize).toInt(),
+            isProperSizeArray(knapsackSize)
+        )
     val sizes = getRandomArray(sizeArrayRequirements)
 
     val priceArrayRequirements =
-        ArrayRequirements(arraySize, minPrice, maxPrice(arraySize.toInt()), fun(_: Array<Int>) = true)
+        ArrayRequirements(arraySize,
+            minPrice,
+            maxPrice(arraySize.toInt()), fun(_: Array<Int>) = true)
     val prices = getRandomArray(priceArrayRequirements)
 
     return (0 until arraySize.toInt()).map { index ->

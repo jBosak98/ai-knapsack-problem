@@ -1,3 +1,5 @@
+package generators
+
 import model.Population
 
 fun generateEpoch(

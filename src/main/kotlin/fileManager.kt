@@ -1,17 +1,19 @@
+import generators.generateItems
 import model.Item
 import model.Task
 import java.io.File
+import java.lang.Exception
 
 @ExperimentalUnsignedTypes
-fun writeTaskToFile(task: Task, outputFile: String) {
+private fun writeTaskToFile(task: Task, outputFile: String) {
     val configCSV = getTaskConfigCSV(task)
     val itemsCSV = getTaskItemsCSV(task)
     File(outputFile).writeText(configCSV + itemsCSV)
 }
 
 @ExperimentalUnsignedTypes
-fun readTaskFromFile(filename:String): Task {
-    val lines = File(filename).readLines()
+private fun readTaskFromFile(file:File): Task {
+    val lines = file.readLines()
     val (arraySize,  knapsackCapacity, knapsackSize) = lines.first().split(",")
     val items = getItemsFromCSV(lines.drop(1))
     return Task(arraySize.toUInt(),knapsackCapacity.toUInt(), knapsackSize.toUInt(), items)
@@ -33,4 +35,20 @@ private fun getTaskItemsCSV(task:Task): String {
         "$acc$weight,$size,$price\n"
     }
 
+}
+
+@ExperimentalUnsignedTypes
+fun createTaskFromFile(filename: String): Task {
+    val file = File(filename)
+    val itemsAmount = 100u
+    val knapsackCapacity = 100u
+    val knapsackSize = 100u
+    try {
+        if (file.exists()) return readTaskFromFile(file)
+    }catch (e: Exception){}
+
+    val items = generateItems(itemsAmount, knapsackCapacity, knapsackSize)
+    val task = Task(itemsAmount, knapsackCapacity, knapsackSize, items)
+    writeTaskToFile(task, filename)
+    return task
 }

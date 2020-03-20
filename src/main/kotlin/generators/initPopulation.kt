@@ -1,3 +1,5 @@
+package generators
+
 import model.Individual
 import model.Item
 import model.Population
