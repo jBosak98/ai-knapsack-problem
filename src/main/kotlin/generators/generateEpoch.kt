@@ -7,5 +7,9 @@ fun generateEpoch(
     mutation: (Population) -> Population,
     selection: (Population) -> Population
 ): (Population, Int) -> Population {
-    return { acc: Population, _: Int -> acc.let(crossover).let(mutation).let(selection) }
+    return { acc: Population, _: Int ->
+         acc.let(crossover)
+            .let(mutation)
+            .let(selection)
+    }
 }

@@ -2,21 +2,24 @@ import model.Item
 import model.Task
 
 
-fun getRandomAlgorithm(fulfilment: (Array<Item>) -> Boolean, task:Task): (Int) -> Array<Item> {
+fun getRandomAlgorithm(fulfilment: (Array<Item>) -> Boolean, task: Task): (Int) -> Array<Item> {
 
     fun fillKnapsack(fulfilment: (Array<Item>) -> Boolean): (items: Array<Item>, item: Item) -> Array<Item> {
-        return { items, item ->
+        return fun(items: Array<Item>, item: Item): Array<Item> {
             val newItems = (arrayOf(*items, item))
-            when (fulfilment(newItems)) {
+            return when (fulfilment(newItems)) {
                 true -> newItems
-                false -> items
+                else -> items
             }
         }
     }
 
-    val knapsack = task.items
-        .toList()
-        .shuffled()
-        .fold(emptyArray(), fillKnapsack(fulfilment))
-    return { knapsack }
+    return fun(_: Int): Array<Item> {
+        return task
+            .items
+            .toList()
+            .shuffled()
+            .fold(emptyArray(), fillKnapsack(fulfilment))
+    }
+
 }
