@@ -27,7 +27,7 @@ private fun getItemsFromCSV(lines:List<String>) =
 
 private fun getTaskConfigCSV(task:Task): String {
     val (arraySize,  knapsackCapacity, knapsackSize,_) = task
-    return "$arraySize, $knapsackCapacity, $knapsackSize\n"
+    return "$arraySize,$knapsackCapacity,$knapsackSize\n"
 }
 private fun getTaskItemsCSV(task:Task): String {
     return task.items.sortedBy { it.id }.fold(""){ acc, item ->
