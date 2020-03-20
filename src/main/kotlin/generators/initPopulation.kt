@@ -10,12 +10,13 @@ fun initPopulation(
     populationSize: UInt,
     algorithm: (Int) -> Array<Item>,
     createIndividual: (items: Array<Item>) -> Individual
-): Population {
-    val knapsacks = (0..populationSize.toInt()).map(algorithm)
-    return Population(knapsacks.map { knapsack ->
-        createIndividual(knapsack)
-    })
-}
+): Population =
+    (0 until populationSize.toInt())
+        .map(algorithm)
+        .map(createIndividual)
+        .let { Population(it) }
+
+
 
 
 
