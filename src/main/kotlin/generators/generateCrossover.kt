@@ -8,7 +8,7 @@ import kotlin.random.nextInt
 
 fun generateCrossover(
     probability: Double,
-    createIndividual: ((Array<Item>) -> Individual)
+    createIndividual: ((List<Item>) -> Individual)
 ): (Population) -> Population {
     fun doCrossover(): Boolean {
         return Random.nextFloat() < probability
@@ -19,18 +19,17 @@ fun generateCrossover(
 
         val xPlace = Random.nextInt(parent1.indices)
 
-        val p1Chromosome = parent1.take(xPlace).toTypedArray()
-        val p2Chromosome = parent2.drop(xPlace).toTypedArray()
+        val p1Chromosome = parent1.take(xPlace)
+        val p2Chromosome = parent2.drop(xPlace)
 
-        return arrayOf(*p1Chromosome, *p2Chromosome)
+        return (p1Chromosome + p2Chromosome)
             .distinctBy { it.id }
-            .toTypedArray()
             .let(createIndividual)
 
     }
     return { population: Population ->
-        val parents1 = population.individuals.toList().shuffled()
-        val parents2 = population.individuals.toList().shuffled()
+        val parents1 = population.individuals.shuffled()
+        val parents2 = population.individuals.shuffled()
 
         val knapsacks = parents1.zip(parents2).map { pair: Pair<Individual, Individual> ->
             when (doCrossover()) {

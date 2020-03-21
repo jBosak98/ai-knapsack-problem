@@ -23,7 +23,7 @@ private fun getItemsFromCSV(lines:List<String>) =
     lines.mapIndexed { index, it ->
         val (weight,size,price) = it.split(",")
         Item(index, weight.toInt(), size.toInt(), price.toInt())
-    }.toTypedArray()
+    }
 
 private fun getTaskConfigCSV(task:Task): String {
     val (arraySize,  knapsackCapacity, knapsackSize,_) = task

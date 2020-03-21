@@ -1,4 +1,4 @@
 package model
 
-data class Individual(val items:Array<Item>, val evaluation:Int)
+data class Individual(val items:List<Item>, val evaluation:Int)
 

@@ -3,8 +3,8 @@ package generators
 import model.Item
 
 
-fun generateEvaluate(fulfilment:(Array<Item>) -> Boolean): (Array<Item>) -> Int {
-    val evaluate: (Array<Item>) -> Int = { knapsack:Array<Item> ->
+fun generateEvaluate(fulfilment:(List<Item>) -> Boolean): (List<Item>) -> Int {
+    val evaluate: (List<Item>) -> Int = { knapsack:List<Item> ->
         when {
             (fulfilment(knapsack)) -> knapsack.sumBy { it.price }
             else -> 0

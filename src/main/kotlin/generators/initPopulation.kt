@@ -8,8 +8,8 @@ import model.Population
 @ExperimentalUnsignedTypes
 fun initPopulation(
     populationSize: UInt,
-    algorithm: (Int) -> Array<Item>,
-    createIndividual: (items: Array<Item>) -> Individual
+    algorithm: (Int) -> List<Item>,
+    createIndividual: (items: List<Item>) -> Individual
 ): Population =
     (0 until populationSize.toInt())
         .map(algorithm)
