@@ -40,9 +40,9 @@ private fun getTaskItemsCSV(task:Task): String {
 @ExperimentalUnsignedTypes
 fun createTaskFromFile(filename: String): Task {
     val file = File(filename)
-    val itemsAmount = 100u
-    val knapsackCapacity = 100u
-    val knapsackSize = 100u
+    val itemsAmount = 1200u
+    val knapsackCapacity = 12000u
+    val knapsackSize = 18000u
     try {
         if (file.exists()) return readTaskFromFile(file)
     }catch (e: Exception){}
