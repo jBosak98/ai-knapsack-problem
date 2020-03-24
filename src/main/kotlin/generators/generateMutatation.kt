@@ -1,10 +1,12 @@
 package generators
 
+import kotlinx.coroutines.runBlocking
 import model.Individual
 import model.Item
 import model.Population
+import utils.amap
 
-fun generateMutation(
+suspend fun generateMutation(
     probability: Double,
     createIndividual: (List<Item>) -> Individual,
     items: List<Item>
@@ -20,7 +22,7 @@ fun generateMutation(
         val coalescence = postGenome + postMutation
         createIndividual(coalescence)
     }
-    return { population: Population ->
-        Population(population.individuals.map { individual ->  mutation(individual) })
+    return fun(population: Population):Population = runBlocking {
+        Population(population.individuals.amap { individual ->  mutation(individual) })
     }
 }

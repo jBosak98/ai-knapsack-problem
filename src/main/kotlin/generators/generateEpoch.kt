@@ -2,7 +2,8 @@ package generators
 
 import model.Population
 
-fun generateEpoch(
+
+suspend fun generateEpoch(
     crossover: (Population) -> Population,
     mutation: (Population) -> Population,
     selection: (Population) -> Population

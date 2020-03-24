@@ -1,6 +1,7 @@
-import generators.getTheBest
+
 import model.Item
 import model.Task
+import utils.getTheBest
 
 private fun fillKnapsack(
     knapsack: List<Item>,
